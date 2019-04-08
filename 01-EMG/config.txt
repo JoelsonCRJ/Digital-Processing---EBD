@@ -1,2 +1,5 @@
 Feito utilizando o anaconda python 3.7
  utilizando as libs numpy,scipy,matplotlib
+
+
+teste lorena
