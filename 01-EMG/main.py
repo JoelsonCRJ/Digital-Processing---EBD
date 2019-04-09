@@ -9,14 +9,26 @@ sys.path.insert(1, r'./../functions')  # add to pythonpath
 from detect_peaks import detect_peaks
 #------------------------------------------------------------------------
 
-def remove_peaks(peaks_index_array,array,window_size):
+def interp_peaks(peaks_index_array,array,window_size): 
     for i in range (0,len(peaks_index_array)):
-        if (peaks_index_array[i]<window_size):
-            array[0:peaks_index_array[i]+8*window_size]=0+0j
-        elif((len(array)-i) < window_size):
-            array[peaks_index_array[i] :(peaks_index_array[i]-2*window_size)]=0+0j
+        #para picos com enderecos menores que a janela utilizar uma janela maior a direita 
+        #com polinomio interpolador
+        if (peaks_index_array[i]<window_size): 
+            x = np.arange(0,(peaks_index_array[i]+6*window_size))
+            y=array[(peaks_index_array[i]+6*window_size):(peaks_index_array[i]+(2*6*window_size)+1)]
+            f=interp1d(x,y,kind='cubic')
+            array[0:peaks_index_array[i]+6*window_size]=f(x)
+        
+        elif (array[peaks_index_array[i]].real>15):
+            x = np.arange((peaks_index_array[i]-60),(peaks_index_array[i]+60))
+            y=array[(peaks_index_array[i]-(60+120)):(peaks_index_array[i]-60)]
+            f=interp1d(x,y,kind='cubic')
+            array[(peaks_index_array[i]-60):(peaks_index_array[i]+60)] = f(x)
         else:
-            array[(peaks_index_array[i]-50):(peaks_index_array[i]+50)] = 0+0j
+            x = np.arange((peaks_index_array[i]-180),(peaks_index_array[i]+180))
+            y=array[(peaks_index_array[i]-(180+360)):(peaks_index_array[i]-180)]
+            f=interp1d(x,y,kind='cubic')
+            array[(peaks_index_array[i]-180):(peaks_index_array[i]+180)] = f(x)
     return array
 #------------------------------------------------------------------------
 filepath = "coleta_valnete.txt"  
@@ -28,11 +40,11 @@ T = 1/Fs
 
 b, a = signal.butter(5, [10/500, 450/500], 'bandpass')
 Y_butter = lfilter(b, a,data)
-
 N=len(Y_butter)
 t=N*T
 
 Y=scipy.fftpack.fft(Y_butter)
+#codigo para plotar fft
 # P2=abs(Y/N)
 # a=int ((N/2)+1)
 # P1=P2[2:a]
@@ -42,14 +54,24 @@ Y=scipy.fftpack.fft(Y_butter)
 # plt.show()
 
 Inv = scipy.ifft(Y)
-ind = detect_peaks(Inv,mph=0, mpd=(0.8/T),show=True)
+ind = detect_peaks(Inv,mph=0, mpd=(750),show=True)
+Inv=interp_peaks(ind,Inv,50)
+print(ind)
 
-Inv=remove_peaks(ind,Inv,50)
 
-# f=interp1d(time[0:400].real,Inv[0:400].real)
-# xnew = np.linspace(0, 400, num=400)
+plt.figure(1)
+
+plt.subplot(211)
+plt.plot(time,data,'r')
+plt.legend(['EMG +ECG'],loc='best')
+plt.ylim(440, 560)
+plt.xlim(0,60000)
+
+plt.subplot(212)
 plt.plot(time,Inv)
-plt.legend(['data'],loc='best')
+plt.legend(['EMG'],loc='best')
+plt.ylim(-60, 60)
+plt.xlim(0,60000)
 plt.show()
 
 
