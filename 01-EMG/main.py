@@ -66,12 +66,17 @@ plt.plot(time,data,'r')
 plt.legend(['EMG +ECG'],loc='best')
 plt.ylim(440, 560)
 plt.xlim(0,60000)
+plt.xlabel('Amostras - T=1ms - Fa = 1Khz')
+plt.ylabel('Valor de sinal quantizado - 12bits')
 
 plt.subplot(212)
 plt.plot(time,Inv)
 plt.legend(['EMG'],loc='best')
 plt.ylim(-60, 60)
 plt.xlim(0,60000)
+plt.xlabel('Amostras - T=1ms - Fa = 1Khz')
+plt.ylabel('Amplitude do sinal retirando-se o offset')
+
 plt.show()
 
 
