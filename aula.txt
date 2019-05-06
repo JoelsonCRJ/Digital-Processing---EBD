@@ -1,0 +1,24 @@
+- atividade 01 :
+	descrever melhor o experimento;
+	explicar a função que foi utilizada;
+	legenda nos plots
+	não se fala em amostras, se fala em quanto tempo (ms)
+- atividade 05: ( artigo do wander)
+	resumir o artigo;
+	explicar em português as seções que identifiquei;
+	proposta de melhoras;
+- atividade 04: algoritmo para extração de características
+	treinamento feito em seções (80%)
+	validação feita só uma vez(20%)
+	tempo online para emg (~=150 a 300ms) janela de tempo
+	extração dos vetores de características a 150ms 
+	extrair vetor de caracteristica por canais
+
+	c1 	->f1(150) ->f2(300)
+	c2	->f1(150) ->f2(300)
+	c3	->f1(150) ->f2(300)
+	c4	->f1(150) ->f2(300)
+
+- atividade 4 - experimento captura de sinal de ecg
+	comparar graficos na mesma escala e um embaixo do outro
+	enfatizar o experimento ( o professor gosta disso)
