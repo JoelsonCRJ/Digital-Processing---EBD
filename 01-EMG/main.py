@@ -52,7 +52,7 @@ Y=scipy.fftpack.fft(Y_butter)
 # f = (Fs/N)*np.arange(0,(N/2),1)
 # plt.plot(f[0:len(f)-1],P1)-1
 # plt.show()
-
+a=scipy.ifft(Y)
 Inv = scipy.ifft(Y)
 ind = detect_peaks(Inv,mph=0, mpd=(750),show=True)
 Inv=interp_peaks(ind,Inv,50)
@@ -60,22 +60,34 @@ print(ind)
 
 
 plt.figure(1)
-
-plt.subplot(211)
-plt.plot(time,data,'r')
-plt.legend(['EMG +ECG'],loc='best')
+plt.plot(time,data,'b')
+plt.legend(['Sinal original'],loc='best')
 plt.ylim(440, 560)
 plt.xlim(0,60000)
-plt.xlabel('Amostras - T=1ms - Fa = 1Khz')
+plt.xlabel('tempo (ms)')
 plt.ylabel('Valor de sinal quantizado - 12bits')
 
-plt.subplot(212)
-plt.plot(time,Inv)
-plt.legend(['EMG'],loc='best')
+plt.figure(2)
+plt.plot(time,a,'r')
+plt.legend(['Sinal filtrado - Butter 5ª ordem'],loc='best')
 plt.ylim(-60, 60)
 plt.xlim(0,60000)
-plt.xlabel('Amostras - T=1ms - Fa = 1Khz')
-plt.ylabel('Amplitude do sinal retirando-se o offset')
+
+plt.xlabel('tempo (ms)')
+plt.ylabel('Valor de sinal quantizado - 12bits')
+# plt.savefig('a.ps', dpi=95, facecolor=None, edgecolor=None,
+#         orientation='portrait', papertype=None, format=None,
+#         transparent=False, bbox_inches=None, pad_inches=0.1,
+#         frameon=None, metadata=None)
+
+plt.figure(3)
+plt.plot(time,a,'b',label='Sinal filtrado com ECG')
+plt.plot(time,Inv,'r',label='Sinal filtrado sem ECG')
+plt.legend(['Sinal filtrado com ECG','Sinal filtrado sem ECG'],loc='best')
+plt.xlabel('tempo (ms)')
+plt.ylabel('Valor de sinal quantizado - 12bits')
+plt.ylim(-60, 60)
+plt.xlim(0,60000)
 
 plt.show()
 
