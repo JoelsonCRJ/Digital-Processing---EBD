@@ -98,14 +98,14 @@ Inv=interp_peaks(ind,Inv,50)
 # plt.ylabel('Valor de sinal quantizado - 12bits')
 
 
-# plt.figure(3)
-# plt.plot(time,a,'b',label='Sinal filtrado com ECG')
-# plt.plot(time,Inv,'r',label='Sinal filtrado sem ECG')
-# plt.legend(['Sinal filtrado com ECG','Sinal filtrado sem ECG'],loc='best')
-# plt.xlabel('tempo (ms)')
-# plt.ylabel('Valor de sinal quantizado - 12bits')
-# plt.ylim(-60, 60)
-# plt.xlim(0,60000)
+plt.figure(3)
+plt.plot(time,a,'b',label='Sinal filtrado com ECG')
+plt.plot(time,Inv,'r',label='Sinal filtrado sem ECG')
+plt.legend(['Sinal filtrado com ECG','Sinal filtrado sem ECG'],loc='best')
+plt.xlabel('tempo (ms)')
+plt.ylabel('Valor de sinal quantizado - 12bits')
+plt.ylim(-60, 60)
+plt.xlim(0,60000)
 
 plt.show()
 

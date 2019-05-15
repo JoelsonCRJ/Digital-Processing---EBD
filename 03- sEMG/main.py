@@ -36,7 +36,7 @@ emg_signal_10 = np.array((data_EMG_signals[:,9]))
 
 #ang=((3/(pow(2,16)-1))*(angulos-(3/2)))/((3/2)*606*(pow(10,-5)))
 #
-print(data_sEMG_labels)
+print(emg_signal_1)
 #print(ang)
 
 
@@ -67,23 +67,24 @@ plt.subplot(11,1,6)
 plt.plot(tempo,emg_signal_5)
 
 
-plt.subplot(11,1,7)
-plt.plot(tempo,emg_signal_6)
+# plt.subplot(11,1,7)
+# plt.plot(tempo,emg_signal_6)
 
-plt.subplot(11,1,8)
-plt.plot(tempo,emg_signal_7)
+# plt.subplot(11,1,8)
+# plt.plot(tempo,emg_signal_7)
 
-plt.subplot(11,1,9)
-plt.plot(tempo,emg_signal_8)
+# plt.subplot(11,1,9)
+# plt.plot(tempo,emg_signal_8)
 
-plt.subplot(11,1,10)
-plt.plot(tempo,emg_signal_9)
+# plt.subplot(11,1,10)
+# plt.plot(tempo,emg_signal_9)
 
-plt.subplot(11,1,11)
-plt.plot(tempo,emg_signal_10)
+# plt.subplot(11,1,11)
+# plt.plot(tempo,emg_signal_10)
 
 # #plt.suptitle(str(classes))
 
 plt.show()
+
 
 
