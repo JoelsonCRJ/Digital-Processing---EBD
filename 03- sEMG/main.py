@@ -5,7 +5,7 @@ import numpy as np
 inMATFile = 'S02.mat'
 data = io.loadmat(inMATFile)
 
-print(data.keys())
+#print(data.keys())
 
 data_Fs = data['Fs']
 data_class_mapf=data['class_mapf']
@@ -34,55 +34,77 @@ emg_signal_9 = np.array((data_EMG_signals[:,8]))
 emg_signal_10 = np.array((data_EMG_signals[:,9]))
 
 
-#ang=((3/(pow(2,16)-1))*(angulos-(3/2)))/((3/2)*606*(pow(10,-5)))
-#
-print(emg_signal_1)
-#print(ang)
+print(emg_signal_10)
+secoes_vector = np.zeros(len(tempo))
+secoes_classe = np.zeros(len(tempo))
+print(len(classes))
+for i in range(0,20):
+    if(i>=0 and i<=9):
+        secoes_vector[tempo_inicial[i*22]:tempo_final[(i*22)+21]]= i+1
+    elif(i>=10 and i<=20):
+        secoes_vector[tempo_inicial[i*22]:tempo_final[(i*22)+21]]= ((i+1)-10)
+
+for j in range(0,440):
+    secoes_classe[tempo_inicial[j]:tempo_final[j]] = classes[j]
 
 
 
-# for i in range(0,len(classes)):
-#     if(classes[i]==1):
-#         tempo_inicial[i]
-#         tempo_final[i]
+plt.figure(1)
 #plot canais
-# print(len(emg_signal_1
-# ))
-plt.subplot(11,1,1)
+
+plt.subplot(13,1,1)
+plt.plot(tempo,secoes_vector)
+plt.xlim(0,1260450)
+
+plt.subplot(13,1,2)
+plt.plot(tempo,secoes_classe,'r')
+plt.xlim(0,1260450)
+
+plt.subplot(13,1,3)
 plt.plot(tempo,data_knee_angle)
+plt.xlim(0,1260450)
 
-plt.subplot(11,1,2)
+plt.subplot(13,1,4)
 plt.plot(tempo,emg_signal_1)
+plt.xlim(0,1260450)
 
-plt.subplot(11,1,3)
+plt.subplot(13,1,5)
 plt.plot(tempo,emg_signal_2)
+plt.xlim(0,1260450)
 
-plt.subplot(11,1,4)
+plt.subplot(13,1,6)
 plt.plot(tempo,emg_signal_3)
+plt.xlim(0,1260450)
 
-plt.subplot(11,1,5)
+plt.subplot(13,1,7)
 plt.plot(tempo,emg_signal_4)
+plt.xlim(0,1260450)
 
-plt.subplot(11,1,6)
+plt.subplot(13,1,8)
 plt.plot(tempo,emg_signal_5)
+plt.xlim(0,1260450)
 
+plt.subplot(13,1,9)
+plt.plot(tempo,emg_signal_6)
+plt.xlim(0,1260450)
 
-# plt.subplot(11,1,7)
-# plt.plot(tempo,emg_signal_6)
+plt.subplot(13,1,10)
+plt.plot(tempo,emg_signal_7)
+plt.xlim(0,1260450)
 
-# plt.subplot(11,1,8)
-# plt.plot(tempo,emg_signal_7)
+plt.subplot(13,1,11)
+plt.plot(tempo,emg_signal_8)
+plt.xlim(0,1260450)
 
-# plt.subplot(11,1,9)
-# plt.plot(tempo,emg_signal_8)
+plt.subplot(13,1,12)
+plt.plot(tempo,emg_signal_9)
+plt.xlim(0,1260450)
 
-# plt.subplot(11,1,10)
-# plt.plot(tempo,emg_signal_9)
-
-# plt.subplot(11,1,11)
-# plt.plot(tempo,emg_signal_10)
-
+plt.subplot(13,1,13)
+plt.plot(tempo,emg_signal_10)
+plt.xlim(0,1260450)
 # #plt.suptitle(str(classes))
+
 
 plt.show()
 
