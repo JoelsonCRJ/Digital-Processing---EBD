@@ -32,5 +32,21 @@ def plot_session(musculos, intervalos, labels):
              axes[j].axvline(intervalos[i][1]-5, color='#000000',alpha=0.5, linewidth=1.5)
     plt.show()
 
-sessions = load_dict('data.pkl')
+
+def descript_vectors(musc, intervalos,labels):
+        for i in range(0,len(labels)):
+                intervalo_inicial = np.array(intervalos[i][0])
+                intervalo_final = np.array(intervalos[i][1])
+                print(intervalo_inicial)
+                print(intervalo_final)
+
+sessions = load_dict('/home/joelson/Documents/Digital-Processing-EBD-UFES-2019.1/02-EMG/data.pkl')
 plot_session(sessions['1'][0].T[0:11],sessions['1'][1],sessions['1'][2])
+
+descript_vectors(sessions['1'][0].T[0:11],sessions['1'][1],sessions['1'][2])
+
+
+# a=(sessions['1'][0:11][0:800])
+
+
+
