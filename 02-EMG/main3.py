@@ -43,8 +43,8 @@ def descript_vectors(musc, intervalos,labels):
                 intervalo_final = intervalos[i][1]
                 for j in range(0,11):
                         v=np.append(v,musc[j][intervalo_inicial:intervalo_final])
-                        M=np.concatenate((M,v),axis=0)        
-        
+                M=np.concatenate((M,v),axis=0)        
+                L.np.concatenate(labels[i])
 sessions = load_dict('/home/joelson/Documents/Digital-Processing-EBD-UFES-2019.1/02-EMG/data.pkl')
 #plot_session(sessions['1'][0].T[0:11],sessions['1'][1],sessions['1'][2],M,L)
 
