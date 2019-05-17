@@ -34,26 +34,27 @@ def plot_session(musculos, intervalos, labels):
 
 
 def descript_vectors(musc, intervalos,labels):
-        v_1=[]
-        v_2=[]
-        v_3=[]
-        v_4=[]
-        v_5=[]
-        v_6=[]
+
+        global M,L
+        
         for i in range(0,len(labels)):
+                v=np.array([])
                 intervalo_inicial = intervalos[i][0]
                 intervalo_final = intervalos[i][1]
-                if (labels[i]==3):
-                        v_1.append(musc[intervalo_inicial:intervalo_inicial])
-                        print(v_1)
-                
-sessions = load_dict('/home/familia/Documents/Digital-Processing-EBD-UFES-2019.1/02-EMG/data.pkl')
-#plot_session(sessions['1'][0].T[0:11],sessions['1'][1],sessions['1'][2])
+                for j in range(0,11):
+                        v=np.append(v,musc[j][intervalo_inicial:intervalo_final])
+                        M=np.concatenate((M,v),axis=0)        
+        
+sessions = load_dict('/home/joelson/Documents/Digital-Processing-EBD-UFES-2019.1/02-EMG/data.pkl')
+#plot_session(sessions['1'][0].T[0:11],sessions['1'][1],sessions['1'][2],M,L)
 
-#descript_vectors(sessions['1'][0].T[0:11],sessions['1'][1],sessions['1'][2])
 v=np.array(sessions['1'][0].T[0:11][0:800])
-print(v[0])
 
+M=np.array([])
+L=np.array([])
+
+descript_vectors(sessions['1'][0].T[0:11],sessions['1'][1],sessions['1'][2])
+print(M.shape)
 # v.flatten()
 # print(v)
 # a=(sessions['1'][0:11][0:800])
