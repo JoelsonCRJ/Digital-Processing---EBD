@@ -52,7 +52,7 @@ def descript_vectors(musc, intervalos,labels):
 M=np.array([])
 L=np.array([])
 
-sessions = load_dict('/home/familia/Documents/Digital-Processing-EBD-UFES-2019.1/02-EMG/data.pkl')
+sessions = load_dict('/home/joelson/Documents/Digital-Processing-EBD-UFES-2019.1/02-EMG/data.pkl')
 #plot_session(sessions['1'][0].T[0:11],sessions['1'][1],sessions['1'][2])
 
 
@@ -77,6 +77,7 @@ plt.grid()
 plt.colorbar()
 plt.show()
 #aplicando SVM
+
 
 
 
