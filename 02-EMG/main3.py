@@ -9,10 +9,13 @@ from scipy import signal
 from sklearn import svm
 from mlxtend.plotting import plot_decision_regions
 from six.moves import cPickle as pickle
+from sklearn import svm
+
 
 
 def save_dict(di_, filename_):
     with open(filename_, 'wb') as f:
+
         pickle.dump(di_, f)
 
 def load_dict(filename_):
@@ -52,12 +55,8 @@ def descript_vectors(musc, intervalos,labels):
 M=np.array([])
 L=np.array([])
 
-sessions = load_dict('/home/joelson/Documents/Digital-Processing-EBD-UFES-2019.1/02-EMG/data.pkl')
+sessions = load_dict('/home/familia/Documents/Digital-Processing-EBD-UFES-2019.1/02-EMG/data.pkl')
 #plot_session(sessions['1'][0].T[0:11],sessions['1'][1],sessions['1'][2])
-
-
-
-
 
 
 #treinamento
@@ -72,26 +71,12 @@ pca =decomposition.PCA(n_components=2)
 pca.fit(M)
 X = pca.transform(M)
 Y=L.T
-plt.scatter(X[:, 0], X[:, 1],c=L.T, edgecolor='none', alpha=0.5,cmap=plt.cm.get_cmap('Spectral', 6))
-plt.grid()
-plt.colorbar()
-plt.show()
-#aplicando SVM
+# plt.scatter(X[:, 0], X[:, 1],c=L.T, edgecolor='none', alpha=0.5,cmap=plt.cm.get_cmap('Spectral', 6))
+# plt.grid()
+# plt.colorbar()
+# plt.show()
+#aplicando svm
 
-
-
-
-
-
-
-
-
-
-        
-
-# v.flatten()
-# print(v)
-# a=(sessions['1'][0:11][0:800])
 
 
 
