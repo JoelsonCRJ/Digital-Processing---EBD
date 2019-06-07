@@ -55,7 +55,7 @@ def descript_vectors(musc, intervalos,labels):
 M=np.array([])
 L=np.array([])
 
-sessions = load_dict('/home/familia/Documents/Digital-Processing-EBD-UFES-2019.1/02-EMG/data.pkl')
+sessions = load_dict('/home/joelson/Documents/Digital-Processing-EBD-UFES-2019.1/02-EMG/data.pkl')
 #plot_session(sessions['1'][0].T[0:11],sessions['1'][1],sessions['1'][2])
 
 
@@ -71,6 +71,13 @@ pca =decomposition.PCA(n_components=2)
 pca.fit(M)
 X = pca.transform(M)
 Y=L.T
+
+# novo = np.zeros((440,3))
+# novo[:,:2]=X
+# novo[:,2]=Y
+
+# np.save('data.npy',novo)
+
 # plt.scatter(X[:, 0], X[:, 1],c=L.T, edgecolor='none', alpha=0.5,cmap=plt.cm.get_cmap('Spectral', 6))
 # plt.grid()
 # plt.colorbar()
@@ -79,4 +86,34 @@ Y=L.T
 
 
 
+#A_train, A_test, labels_train, labels_test = train_test_split(A.T, labels.T, test_size=0.20)
 
+
+pca = decomposition.PCA(n_components=2)
+pca.fit(M)
+X = pca.transform(M)
+
+
+pca = decomposition.PCA(n_components=2)
+pca.fit(M_individuo2)
+X_individuo2 = pca.transform(M_individuo2)
+
+
+
+clf = svm.SVC(gamma='scale', decision_function_shape='ovo')
+clf.fit(X, Y)
+plot_decision_regions(X=X,
+y=Y.astype(np.integer),
+clf=clf)
+plt.show()
+
+
+
+
+j=0
+for i in range(len(labels_test_individuo2)):
+    dec = clf.predict([X_individuo2[i,:]])
+    if dec[0]==labels_test_individuo2[i]:
+        j=j+1
+
+print("%: ", j*100/int(len(labels_test_individuo2)))
